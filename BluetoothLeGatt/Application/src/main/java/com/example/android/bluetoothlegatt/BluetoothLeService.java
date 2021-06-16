@@ -52,6 +52,7 @@ public class BluetoothLeService extends Service {
     private BluetoothAdapter mBluetoothAdapter;
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
+    private boolean eventOneExecuted = false;
     // TODO: IMPLEMENT
     private TextView readData;
 
@@ -136,15 +137,16 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
             if (characteristic.getUuid().equals(UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc40"))) {
-                String input = Base64.getEncoder().encodeToString(characteristic.getValue());
-                String oldInput = "";
-
-                if(input != oldInput) {
-                    oldInput = input;
-                    System.out.println("test");
-                    DeviceControlActivity.setDetails(input, "Oliver,Tobias", DeviceControlActivity.tvDocId.getText().toString());
+                Integer input = byteArrayToInt(characteristic.getValue());
+                if(input == 1) {
+                    if (!eventOneExecuted) {
+                        System.out.println("Event one has triggered");
+                        DeviceControlActivity.setDetails(input.toString() , "Oliver,Tobias", DeviceControlActivity.tvDocId.getText().toString());
+                        eventOneExecuted = true;
+                    }
                 }
             }
+            
 
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
@@ -375,6 +377,11 @@ public class BluetoothLeService extends Service {
         if (status == false) {
             Log.w(TAG, "Failed to write characteristic");
         }
+    }
+
+    private int byteArrayToInt(byte[] b)
+    {
+        return   b[0] & 0xFF;
     }
 
 }
