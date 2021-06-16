@@ -1,0 +1,193 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+MERGED from [com.android.support:support-v13:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cb55d3e6305534ca96d03a91830911d7/support-v13-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/e23f8c80e5e64bfb7b371b196100c6f5/support-v4-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/81bf5a24ea62628adc2da9d735587a2a/cardview-v7-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/0ef48a431512174cec20889548980d06/appcompat-v7-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cbea71217ef362683e5b763aa4358fb1/support-media-compat-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/b195a2c6e63b50d12bce488ac93108d3/support-fragment-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/98b2a54e259b8be7e80d5e091de8dbb0/animated-vector-drawable-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c27b031c3f10763009f2c23dd4a8dbda/support-core-ui-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/9c189f4b771d3e665ca60c6a2dd73e3c/support-core-utils-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c13c580ccb87ddeccbc74552e6670438/support-vector-drawable-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c498a0e19ebd5a40713a3a917c209fe7/loader-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/8c191d38b7725f17c3235ab33e172d74/viewpager-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/95b893d981f645a66b5fa0cb2efca70b/coordinatorlayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cfb4372ed7dc73a752d7186657e78fff/drawerlayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/18906e53ca2f68da8722d2f2facb0b4a/slidingpanelayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/655817559d5b0f53cbf7277efa185b87/customview-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/adba3639a847072aa4ba4ba493bb33cc/swiperefreshlayout-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c9db5ce6feda676d8cbf23e9ae3f7fc/asynclayoutinflater-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c8089c3a8c45848fd4f4f1774de1825/support-compat-28.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a2938833df5a94bac010cc05f63ba40d/versionedparcelable-28.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/48ca4dc0b1c3fc00080e26c5561093d5/cursoradapter-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/2ffa1ce867a46c90f6e6f69464dca32c/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a8edd1c93324acd271a8a4951d5dd9d2/documentfile-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c2ac012bf29eb540e35da44eae7f81c6/localbroadcastmanager-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c984fd947339b81d34b9c0373f06e145/print-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/b0e279da198d60b7e3d29965680c15d1/interpolator-28.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/40f457f00c03af466c8201a062615702/viewmodel-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/993cddc56fc6a63b4bd180fdedfb4005/livedata-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/231dd76b8fe9d1e036bbb4447f64b250/livedata-core-1.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/c09f0df5269f5186c22a4f3ff6e65732/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:1-53:12
+	package
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:21:5-50
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:23:5-30
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:20:11-69
+	android:versionCode
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:22:5-28
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+uses-permission#android.permission.BLUETOOTH
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:31:5-67
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:31:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:32:5-73
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:32:22-71
+uses-feature#android.hardware.bluetooth_le
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:33:5-89
+	android:required
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:33:64-87
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:33:19-63
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:34:5-79
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:34:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:35:5-81
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:35:22-78
+uses-permission#android.permission.INTERNET
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:36:5-67
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:36:22-64
+application
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:39:5-51:19
+MERGED from [com.android.support:support-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c8089c3a8c45848fd4f4f1774de1825/support-compat-28.0.0/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c8089c3a8c45848fd4f4f1774de1825/support-compat-28.0.0/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a2938833df5a94bac010cc05f63ba40d/versionedparcelable-28.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a2938833df5a94bac010cc05f63ba40d/versionedparcelable-28.0.0/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c8089c3a8c45848fd4f4f1774de1825/support-compat-28.0.0/AndroidManifest.xml:22:18-91
+	android:label
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:39:18-50
+	android:icon
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:40:9-45
+	android:theme
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:41:9-56
+activity#com.example.android.bluetoothlegatt.DeviceScanActivity
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:42:9-48:20
+	android:label
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:43:13-45
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:42:19-53
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:44:13-47:29
+action#android.intent.action.MAIN
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:45:17-68
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:45:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:46:17-76
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:46:27-74
+activity#com.example.android.bluetoothlegatt.DeviceControlActivity
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:49:9-58
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:49:19-56
+service#com.example.android.bluetoothlegatt.BluetoothLeService
+ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:50:9-77
+	android:enabled
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:50:53-75
+	android:name
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml:50:18-52
+uses-sdk
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+MERGED from [com.android.support:support-v13:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cb55d3e6305534ca96d03a91830911d7/support-v13-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v13:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cb55d3e6305534ca96d03a91830911d7/support-v13-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/e23f8c80e5e64bfb7b371b196100c6f5/support-v4-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/e23f8c80e5e64bfb7b371b196100c6f5/support-v4-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/81bf5a24ea62628adc2da9d735587a2a/cardview-v7-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/81bf5a24ea62628adc2da9d735587a2a/cardview-v7-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/0ef48a431512174cec20889548980d06/appcompat-v7-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/0ef48a431512174cec20889548980d06/appcompat-v7-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cbea71217ef362683e5b763aa4358fb1/support-media-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cbea71217ef362683e5b763aa4358fb1/support-media-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/b195a2c6e63b50d12bce488ac93108d3/support-fragment-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/b195a2c6e63b50d12bce488ac93108d3/support-fragment-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/98b2a54e259b8be7e80d5e091de8dbb0/animated-vector-drawable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/98b2a54e259b8be7e80d5e091de8dbb0/animated-vector-drawable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c27b031c3f10763009f2c23dd4a8dbda/support-core-ui-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c27b031c3f10763009f2c23dd4a8dbda/support-core-ui-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/9c189f4b771d3e665ca60c6a2dd73e3c/support-core-utils-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/9c189f4b771d3e665ca60c6a2dd73e3c/support-core-utils-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c13c580ccb87ddeccbc74552e6670438/support-vector-drawable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c13c580ccb87ddeccbc74552e6670438/support-vector-drawable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c498a0e19ebd5a40713a3a917c209fe7/loader-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c498a0e19ebd5a40713a3a917c209fe7/loader-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/8c191d38b7725f17c3235ab33e172d74/viewpager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/8c191d38b7725f17c3235ab33e172d74/viewpager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/95b893d981f645a66b5fa0cb2efca70b/coordinatorlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/95b893d981f645a66b5fa0cb2efca70b/coordinatorlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cfb4372ed7dc73a752d7186657e78fff/drawerlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/cfb4372ed7dc73a752d7186657e78fff/drawerlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/18906e53ca2f68da8722d2f2facb0b4a/slidingpanelayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/18906e53ca2f68da8722d2f2facb0b4a/slidingpanelayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/655817559d5b0f53cbf7277efa185b87/customview-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/655817559d5b0f53cbf7277efa185b87/customview-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/adba3639a847072aa4ba4ba493bb33cc/swiperefreshlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/adba3639a847072aa4ba4ba493bb33cc/swiperefreshlayout-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c9db5ce6feda676d8cbf23e9ae3f7fc/asynclayoutinflater-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c9db5ce6feda676d8cbf23e9ae3f7fc/asynclayoutinflater-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c8089c3a8c45848fd4f4f1774de1825/support-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/3c8089c3a8c45848fd4f4f1774de1825/support-compat-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a2938833df5a94bac010cc05f63ba40d/versionedparcelable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a2938833df5a94bac010cc05f63ba40d/versionedparcelable-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/48ca4dc0b1c3fc00080e26c5561093d5/cursoradapter-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/48ca4dc0b1c3fc00080e26c5561093d5/cursoradapter-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/2ffa1ce867a46c90f6e6f69464dca32c/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/2ffa1ce867a46c90f6e6f69464dca32c/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a8edd1c93324acd271a8a4951d5dd9d2/documentfile-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/a8edd1c93324acd271a8a4951d5dd9d2/documentfile-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c2ac012bf29eb540e35da44eae7f81c6/localbroadcastmanager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c2ac012bf29eb540e35da44eae7f81c6/localbroadcastmanager-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c984fd947339b81d34b9c0373f06e145/print-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/c984fd947339b81d34b9c0373f06e145/print-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/b0e279da198d60b7e3d29965680c15d1/interpolator-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/oliver/.gradle/caches/transforms-2/files-2.1/b0e279da198d60b7e3d29965680c15d1/interpolator-28.0.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/40f457f00c03af466c8201a062615702/viewmodel-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/40f457f00c03af466c8201a062615702/viewmodel-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/993cddc56fc6a63b4bd180fdedfb4005/livedata-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/993cddc56fc6a63b4bd180fdedfb4005/livedata-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/231dd76b8fe9d1e036bbb4447f64b250/livedata-core-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/231dd76b8fe9d1e036bbb4447f64b250/livedata-core-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/c09f0df5269f5186c22a4f3ff6e65732/runtime-1.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/oliver/.gradle/caches/transforms-2/files-2.1/c09f0df5269f5186c22a4f3ff6e65732/runtime-1.1.1/AndroidManifest.xml:20:5-44
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		ADDED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
+		INJECTED from /home/oliver/Downloads/connectivity-samples-main/BluetoothLeGatt/Application/src/main/AndroidManifest.xml
