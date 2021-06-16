@@ -2,7 +2,7 @@ from discord.ext import tasks
 import requests
 import discord
 
-TOKEN = "PUT BOT TOKEN HERE"
+TOKEN = "Token here"
 
 intents = discord.Intents.default()
 intents.members = True
@@ -40,7 +40,7 @@ async def checkCouchdb():
     r = requests.get(couchdb)
     data = r.json()
     for entry in [data]:
-        participants = entry["participant"]
+        participants = entry["participant"].split(',')
 
     await mute_all(members)
     for username in participants:
