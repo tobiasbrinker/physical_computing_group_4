@@ -27,6 +27,8 @@ Adafruit_BLEGatt gatt(ble);
 
 int32_t testServiceId;
 int32_t testCharId;
+int32_t testReadId;
+
 
 
 uint8_t TEST_SERVICE_UUID[] = {0xF5,0x61,0x7C,0xD1,0x38,0xE8,0x4E,0x45,
@@ -35,7 +37,13 @@ uint8_t TEST_SERVICE_UUID[] = {0xF5,0x61,0x7C,0xD1,0x38,0xE8,0x4E,0x45,
 uint8_t TESTCHAR_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
                            0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x40};
 
-byte oneHundred[1] = {0x64};                           
+uint8_t TESTREAD_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
+0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x41};
+
+uint8_t sendSignalOne[] = {1};
+byte noHundred[1] = {0x00};
+uint8_t signalOne[1];
+                           
 
 // A small helper
 void error(const __FlashStringHelper*err) {
@@ -75,9 +83,13 @@ void setup()
   if (testServiceId == 0) error(F("Could not add Test service"));
 
   /* Add the testchar characteristics to gatt */
-  testCharId = gatt.addCharacteristic(TESTCHAR_UUID, GATT_CHARS_PROPERTIES_NOTIFY,1 ,16 ,BLE_DATATYPE_BYTEARRAY);
+  testCharId = gatt.addCharacteristic(TESTCHAR_UUID, GATT_CHARS_PROPERTIES_NOTIFY,1 ,16,BLE_DATATYPE_BYTEARRAY);
   if (testCharId == 0) error(F("Could not add TestChar service"));
-  
+
+  testReadId = gatt.addCharacteristic(TESTREAD_UUID, GATT_CHARS_PROPERTIES_WRITE  | GATT_CHARS_PROPERTIES_READ | GATT_CHARS_PROPERTIES_NOTIFY,1 ,16,BLE_DATATYPE_BYTEARRAY);
+  if (testReadId == 0) error(F("Could not add TestRead service"));
+
+ 
   /* Reset the device for the new service setting changes to take effect */
   Serial.print(F("Performing a SW reset (service changes require a reset): "));
   ble.reset();
@@ -86,10 +98,20 @@ void setup()
 }
 
 
+void printHex(uint8_t num) {
+  char hexCar[2];
 
-void loop()
-{
+  sprintf(hexCar, "%02X", num);
+  Serial.println(hexCar);
+}
 
+void loop() {
+  ble.update();
+  
+  gatt.getChar(testReadId, signalOne, sizeof(signalOne));
+  printHex(signalOne[0]);
+  
+  
   
   buttonState = digitalRead(buttonInput);
   if (buttonState == HIGH)
@@ -97,7 +119,7 @@ void loop()
     digitalWrite(ledOutput, HIGH);
     sendSignal = 1;
     /* Set 100 as the characteristics */
-    gatt.setChar(testCharId, oneHundred, sizeof(oneHundred));
+    gatt.setChar(testCharId, sendSignalOne, sizeof(sendSignalOne));
 
 
     
@@ -105,6 +127,7 @@ void loop()
   else{
     digitalWrite(ledOutput, LOW);
     sendSignal = 0;
+    //gatt.setChar(testCharId, noHundred, sizeof(noHundred));
   }
 
 
