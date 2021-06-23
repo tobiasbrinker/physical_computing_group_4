@@ -1,0 +1,4 @@
+#Wed Jun 23 20:49:13 CEST 2021
+base.0=/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
