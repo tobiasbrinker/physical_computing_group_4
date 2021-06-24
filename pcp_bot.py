@@ -37,15 +37,28 @@ async def checkCouchdb():
     channels = guilds[0].channels
     members = channels[3].members
 
+    # Get participants from couchdb
     r = requests.get(couchdb)
     data = r.json()
     for entry in [data]:
         participants = entry["participant"].split(',')
-
-    await mute_all(members)
+    
+    # Get participants from couchdb
     for username in participants:
         print(f"Unmuting: {username}")
         await unmute(username, members)
+
+    # split split participants from muted users
+    member_usernames = []
+    for member in members:
+        username, hashtag = str(member).split('#')
+        member_usernames.append(username)
+    mute_list = list(set(member_usernames) - set(participants))
+
+    # mute all non-participants
+    for username in mute_list:
+        print(f"Muting: {username}")
+        await mute(username, members)
 
 @client.event
 async def on_ready():
