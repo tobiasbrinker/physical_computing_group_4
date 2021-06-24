@@ -1,4 +1,4 @@
-#Thu Jun 24 14:16:45 CEST 2021
+#Thu Jun 24 23:04:34 CEST 2021
 base.0=/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/build/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

@@ -132,8 +132,7 @@ void loop() {
   {
     /* Set 100 as the characteristics */
     gatt.setChar(testCharId, sendSignalOne, sizeof(sendSignalOne));
-
-
+    Serial.println("Button pressed!");
     
   } 
   else{

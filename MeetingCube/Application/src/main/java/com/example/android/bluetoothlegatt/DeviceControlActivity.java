@@ -50,9 +50,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -112,7 +112,6 @@ public class DeviceControlActivity extends Activity {
                             int activity = checkActivities(response);
                             byte[] value = new byte[1];
                             //TODO change int
-                            System.out.println(activity);
 
                             if (activity == 1) {
                                 System.out.println("LED AN");
@@ -383,60 +382,36 @@ public class DeviceControlActivity extends Activity {
         }
     }
 
-
-    public static void setDetails(String activity, String participants, String docId) {
-        dbGet(dbUrl + docId, (JSONObject doc) -> {
-            try {
-                tvDoc.setText(doc.toString(2));
-            } catch (JSONException ex) {
-                Log.d("setDetailsJson", ex.toString());
-            }
-        }, (Exception ex) -> {
-            // show message if there was a problem
-            tvResponse.setText(ex.toString());
-        });
-
-        try {
-            String doc = tvDoc.getText().toString();
-            JSONObject jobj = new JSONObject(doc);
-            jobj.put("participant", participants);
-            jobj.put("activity", activity);
-            // send document to server (and show response from server)
-            dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
-                tvResponse.setText(response.toString());
-            }, null);
-        } catch (JSONException ex) {
-            Log.d("setDetailsDBput", ex.toString());
-        }
-    }
-
     public static void addToActivity(String docId, String userName) {
-        dbGet(dbUrl + docId, (JSONObject doc) -> {
-            try {
-                tvDoc.setText(doc.toString(2));
-            } catch (JSONException ex) {
-                Log.d("addToActivityJson", ex.toString());
-            }
-        }, (Exception ex) -> {
-            // show message if there was a problem
-            tvResponse.setText(ex.toString());
-        });
-
+        System.out.println("Adding to Actitity!");
         try {
+            final String[] json_data = {""};
+            dbGet(dbUrl + docId, (JSONObject doc) -> {
+                json_data[0] = doc.toString(2);
+            }, (Exception ex) -> {
+                // show message if there was a problem
+                Log.d("addToActivitydbget", ex.toString());
+            });
+
             String updated_participants = "";
-            String doc = tvDoc.getText().toString();
-            JSONObject jobj = new JSONObject(doc);
-            String participants = jobj.get("participant").toString();
-            if (participants == "") {
-                updated_participants = new StringBuilder().append(participants).append(userName).toString();
+            String doc = json_data[0];
+            if (doc != "") {
+                JSONObject jobj = new JSONObject(doc);
+                String participants = jobj.get("participant").toString();
+                if (participants == "") {
+                    updated_participants = new StringBuilder().append(participants).append(userName).toString();
+                } else {
+                    updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
+                }
+                final String participants_final = updated_participants;
+                jobj.put("participant", participants_final);
+                // send document to server (and show response from server)
+                dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
+                    Log.d("dbPut:", participants_final);
+                }, null);
             } else {
-                updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
+                Log.d("addToActivityJSON", "Could not get JSON Data!");
             }
-            jobj.put("participant", updated_participants);
-            // send document to server (and show response from server)
-            dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
-                tvResponse.setText(response.toString());
-            }, null);
         } catch (JSONException ex) {
             Log.d("addToActivitydbPut", ex.toString());
         }

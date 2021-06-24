@@ -49,7 +49,7 @@ public class BluetoothLeService extends Service {
     private BluetoothAdapter mBluetoothAdapter;
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
-    private boolean eventOneExecuted = false;
+    public static boolean eventOneExecuted = false;
     // TODO: IMPLEMENT
 
 
