@@ -67,7 +67,6 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
     // TOBIS DATA
-
     public static TextView tvDoc, tvResponse;
     public static TextView tvDocId;
     public final static String dbUrl = "https://couchdb.hci.uni-hannover.de/s21-pcl-g4/";
@@ -408,6 +407,38 @@ public class DeviceControlActivity extends Activity {
             }, null);
         } catch (JSONException ex) {
             Log.d("setDetailsDBput", ex.toString());
+        }
+    }
+
+    public static void addToActivity(String docId, String userName) {
+        dbGet(dbUrl + docId, (JSONObject doc) -> {
+            try {
+                tvDoc.setText(doc.toString(2));
+            } catch (JSONException ex) {
+                Log.d("addToActivityJson", ex.toString());
+            }
+        }, (Exception ex) -> {
+            // show message if there was a problem
+            tvResponse.setText(ex.toString());
+        });
+
+        try {
+            String updated_participants = "";
+            String doc = tvDoc.getText().toString();
+            JSONObject jobj = new JSONObject(doc);
+            String participants = jobj.get("participant").toString();
+            if (participants == "") {
+                updated_participants = new StringBuilder().append(participants).append(userName).toString();
+            } else {
+                updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
+            }
+            jobj.put("participant", updated_participants);
+            // send document to server (and show response from server)
+            dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
+                tvResponse.setText(response.toString());
+            }, null);
+        } catch (JSONException ex) {
+            Log.d("addToActivitydbPut", ex.toString());
         }
     }
 

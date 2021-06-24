@@ -107,7 +107,7 @@ void printHex(uint8_t num) {
   char hexCar[2];
 
   sprintf(hexCar, "%02X", num);
-  //Serial.println(hexCar);
+  Serial.println(hexCar);
 }
 
 void loop() {

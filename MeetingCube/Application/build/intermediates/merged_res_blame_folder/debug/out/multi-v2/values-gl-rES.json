@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/build/intermediates/incremental/mergeDebugResources/merged.dir/values-gl-rES/values-gl-rES.xml",
+            "outputFile": "/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/build/intermediates/incremental/mergeDebugResources/merged.dir/values-gl-rES/values-gl-rES.xml",
             "map": [
                 {
-                    "source": "/home/oliver/.gradle/caches/transforms-2/files-2.1/c17b19e84b25df415084ac3501b4dab7/appcompat-v7-24.0.0/res/values-gl-rES/values-gl-rES.xml",
+                    "source": "/home/tobias/.gradle/caches/transforms-2/files-2.1/c17b19e84b25df415084ac3501b4dab7/appcompat-v7-24.0.0/res/values-gl-rES/values-gl-rES.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

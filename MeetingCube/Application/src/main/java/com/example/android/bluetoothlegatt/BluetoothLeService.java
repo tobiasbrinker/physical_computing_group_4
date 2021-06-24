@@ -152,11 +152,11 @@ public class BluetoothLeService extends Service {
                                             BluetoothGattCharacteristic characteristic) {
             // characteristic für den sensor input
             if (characteristic.getUuid().equals(CUBE_RETRIEVE_UUID)) {
-                Integer input = byteArrayToInt(characteristic.getValue());
+                Integer input = byteArrayToInt(characteristic.getValue()); // activity
                 if(input == 1) {
                     if (!eventOneExecuted) {
                         System.out.println("Signal mit Code 1 empfangen");
-                        DeviceControlActivity.setDetails(input.toString() , USER, DeviceControlActivity.tvDocId.getText().toString());
+                        DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER);
                         eventOneExecuted = true;
                     }
                 }
