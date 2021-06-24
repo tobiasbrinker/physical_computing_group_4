@@ -17,6 +17,7 @@ com/example/android/bluetoothlegatt/DeviceControlActivity.java
  com.example.android.bluetoothlegatt.DeviceControlActivity
  com.example.android.bluetoothlegatt.DeviceControlActivity$1
  com.example.android.bluetoothlegatt.DeviceControlActivity$1$1
+ com.example.android.bluetoothlegatt.DeviceControlActivity$1$2
  com.example.android.bluetoothlegatt.DeviceControlActivity$2
  com.example.android.bluetoothlegatt.DeviceControlActivity$3
  com.example.android.bluetoothlegatt.DeviceControlActivity$4

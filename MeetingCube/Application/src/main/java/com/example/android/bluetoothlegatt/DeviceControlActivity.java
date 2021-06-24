@@ -134,6 +134,15 @@ public class DeviceControlActivity extends Activity {
                 }
             };
             timer.scheduleAtFixedRate(task, 0, 2000);
+
+            Timer timer_resetButton = new Timer("resetButton");
+            TimerTask reset_task = new TimerTask() {
+                @Override
+                public void run() {
+                    BluetoothLeService.eventOneExecuted = false;
+                }
+            };
+            timer_resetButton.scheduleAtFixedRate(reset_task, 0, 10000);
         }
 
         @Override
