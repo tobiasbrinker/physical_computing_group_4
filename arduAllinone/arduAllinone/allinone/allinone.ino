@@ -36,7 +36,7 @@ int piny =A1;
 int pinz =A2;
 int sekundenCounter = 0;
 int triggerCounter = 0;
-int lauf = 0;
+int fingerCounter = 0;
 
 const byte RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
 byte rates[RATE_SIZE]; //Array of heart rates
@@ -55,6 +55,14 @@ const int calVal_eepromAdress = 0;
 unsigned long t = 0;
 
 void setup() {
+  //LEDS mit dem jeweiligen digitalen port an den sie angeschlossen werden müssen
+  //von dem digital port ein kabel zum widerstand, vom widerstand zum längern ende der led. das kürzere ende mit ground verbinden
+  pinMode(13, OUTPUT); //LED 1
+  pinMode(12, OUTPUT); //LED 2
+  pinMode(11, OUTPUT); //LED 3
+
+  //der rest ist kalibrierung für gewichtssensor 
+
   Serial.begin(57600); delay(10);
   Serial.println();
   Serial.println("Starting...");
@@ -87,8 +95,17 @@ void setup() {
 }
 
 void loop() {
+
+  //mit LOW schaltet man die led aus, mit high wieder ein
+  //der jeweilige port je nachdem welche led an sein soll
+  //digitalWrite(13,HIGH);
+  //delay(1000);
+  //digitalWrite(13,LOW);
+  //delay(1000);
   long irValue = particleSensor.getIR();
 
+
+  //heartbeat geschichte
   if (checkForBeat(irValue) == true)
   {
     //We sensed a beat!
@@ -109,20 +126,30 @@ void loop() {
       beatAvg /= RATE_SIZE;
     }
   }
-  if (lauf > 100){
-    Serial.print("IR=");
-    Serial.print(irValue);
-    Serial.print(", BPM=");
-    Serial.print(beatsPerMinute);
-    Serial.print(", Avg BPM=");
-    Serial.print(beatAvg);
+  Serial.print("IR=");
+  Serial.print(irValue);
+  Serial.print(", BPM=");
+  Serial.print(beatsPerMinute);
+  Serial.print(", Avg BPM=");
+  Serial.print(beatAvg);
 
-    if (irValue < 50000)
-      Serial.print(" No finger?");
-
-    Serial.println();
+  //wenn irvalue über 50000 für 5 sekunden würde ich den trigger senden
+  if (irValue < 50000) {
+    Serial.print(" No finger?");
+  } else {
+    if (sekundenCounter < 5000) {
+      fingerCounter += 1;
+    } 
+  }
+    
+  if (fingerCounter > 450) {
+    // hier stattdessen das signal senden
+    digitalWrite(13,HIGH);
   }
 
+  Serial.println();
+
+  //hier ist der beschleunigungssensor bzw. der trigger dafür
   if (analogRead(pinx) < 100 || analogRead(pinx) > 500) {
     triggerCounter = triggerCounter + 1;
     //Serial.print ("X:");
@@ -141,13 +168,19 @@ void loop() {
     //Serial.print(analogRead(pinz));
     //Serial.println();
   }
-  sekundenCounter = sekundenCounter + 10;
+
+  //fingercounter wird hier auch zurück gesetzt
   if (sekundenCounter > 5000) {
     Serial.print(triggerCounter);
     Serial.println();
     sekundenCounter = 0;
     triggerCounter = 0;
+    fingerCounter = 0;
   } 
+  sekundenCounter = sekundenCounter + 10;
+
+  //hier wollt ihr den code reinschreiben. Wenn der triggerCounter auf 100 ist muss das signal gesendet werden an die anderen aduinos
+  //led soll angehen,
   if (triggerCounter > 100) {
     Serial.print ("trigger: ");
     Serial.print(triggerCounter);
@@ -156,11 +189,9 @@ void loop() {
     triggerCounter = 0;
   }
 
-  if (lauf > 100){
-    Serial.print ("X:");
-    Serial.print(analogRead(pinx));
-    Serial.println();
-  }
+  Serial.print ("X:");
+  Serial.print(analogRead(pinx));
+  Serial.println();
 
 
 
@@ -174,18 +205,14 @@ void loop() {
   if (newDataReady) {
     if (millis() > t + serialPrintInterval) {
       float i = LoadCell.getData();
-      if (lauf > 100){
+        //hier muss der teil für den gewichtssensor rein
+        //wenn i größer threshold -> signal senden
         Serial.print("Load_cell output val: ");
         Serial.println(i);
-      }
       newDataReady = 0;
       t = millis();
     }
   }
-  if (lauf > 100) {
-      lauf = 0; 
-  }
-  lauf = lauf+1;
 
 
   // receive command from serial terminal
