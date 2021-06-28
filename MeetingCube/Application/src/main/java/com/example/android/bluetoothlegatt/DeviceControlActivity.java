@@ -112,24 +112,23 @@ public class DeviceControlActivity extends Activity {
                             int activity = checkActivities(response);
                             byte[] value = new byte[1];
                             //TODO change int
-                            System.out.println(activity);
-                            if (activity == 1) {
-                                //TODO change button to real sensor
-                                System.out.println("LED AN (BUTTON)");
-                                value[0] = (byte) (0x04);
-                                mBluetoothLeService.writeCustomCharacteristic(value);
-                            }
-                            /*
-                            else if (activity == 2) {
-                                System.out.println("LED AN (HEARBEAT)");
-                                value[0] = (byte) (0x05);
-                                mBluetoothLeService.writeCustomCharacteristic(value);
-                            }
-                            */
-                            else {
-                                System.out.println("LED AUS");
-                                value[0] = (byte) (0x00);
-                                mBluetoothLeService.writeCustomCharacteristic(value);
+                            switch(activity) {
+                                case 1:
+                                    //TODO change button to real sensor
+                                    System.out.println("LED AN (BUTTON)");
+                                    value[0] = (byte) (0x04);
+                                    mBluetoothLeService.writeCustomCharacteristic(value);
+                                    break;
+                                case 2:
+                                    System.out.println("LED AN (HEARBEAT)");
+                                    value[0] = (byte) (0x05);
+                                    mBluetoothLeService.writeCustomCharacteristic(value);
+                                    break;
+                                default:
+                                    System.out.println("LED AUS");
+                                    value[0] = (byte) (0x00);
+                                    mBluetoothLeService.writeCustomCharacteristic(value);
+                                    break;
                             }
                         } catch (JSONException ex) {
                             Log.d("Timer", ex.toString());
@@ -323,17 +322,17 @@ public class DeviceControlActivity extends Activity {
     // on the UI.
     private void displayGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices == null) return;
-        String uuid = null;
+        String uuid;
         String unknownServiceString = getResources().getString(R.string.unknown_service);
         String unknownCharaString = getResources().getString(R.string.unknown_characteristic);
-        ArrayList<HashMap<String, String>> gattServiceData = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String, String>> gattServiceData = new ArrayList<>();
         ArrayList<ArrayList<HashMap<String, String>>> gattCharacteristicData
-                = new ArrayList<ArrayList<HashMap<String, String>>>();
-        mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
+                = new ArrayList<>();
+        mGattCharacteristics = new ArrayList<>();
 
         // Loops through available GATT Services.
         for (BluetoothGattService gattService : gattServices) {
-            HashMap<String, String> currentServiceData = new HashMap<String, String>();
+            HashMap<String, String> currentServiceData = new HashMap<>();
             uuid = gattService.getUuid().toString();
             currentServiceData.put(
                     LIST_NAME, SampleGattAttributes.lookup(uuid, unknownServiceString));

@@ -152,24 +152,23 @@ public class BluetoothLeService extends Service {
                                             BluetoothGattCharacteristic characteristic) {
             // characteristic für den sensor input
             if (characteristic.getUuid().equals(CUBE_RETRIEVE_UUID)) {
-                Integer input = byteArrayToInt(characteristic.getValue()); // activity
-                System.out.println(input);
-                if(input == 1) {
-                    if (!eventOneExecuted) {
-                        System.out.println("Signal mit Code 1 empfangen");
-                        DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
-                        eventOneExecuted = true;
-                    }
+                int input = byteArrayToInt(characteristic.getValue()); // activity
+                switch (input) {
+                    case 1:
+                        if (!eventOneExecuted) {
+                            System.out.println("Signal mit Code 1 empfangen");
+                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            eventOneExecuted = true;
+                            break;
+                        }
+                    case 2:
+                        if (!eventTwoExecuted) {
+                            System.out.println("Signal mit Code 2 empfangen");
+                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            eventTwoExecuted = true;
+                            break;
+                        }
                 }
-                if(input == 2) {
-                    if (!eventTwoExecuted) {
-                        System.out.println("Signal mit Code 2 empfangen");
-                        DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
-                        eventTwoExecuted = true;
-                    }
-                }
-
-
             }
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
