@@ -112,12 +112,20 @@ public class DeviceControlActivity extends Activity {
                             int activity = checkActivities(response);
                             byte[] value = new byte[1];
                             //TODO change int
-
+                            System.out.println(activity);
                             if (activity == 1) {
-                                System.out.println("LED AN");
+                                //TODO change button to real sensor
+                                System.out.println("LED AN (BUTTON)");
                                 value[0] = (byte) (0x04);
                                 mBluetoothLeService.writeCustomCharacteristic(value);
                             }
+                            /*
+                            else if (activity == 2) {
+                                System.out.println("LED AN (HEARBEAT)");
+                                value[0] = (byte) (0x05);
+                                mBluetoothLeService.writeCustomCharacteristic(value);
+                            }
+                            */
                             else {
                                 System.out.println("LED AUS");
                                 value[0] = (byte) (0x00);
@@ -140,6 +148,7 @@ public class DeviceControlActivity extends Activity {
                 @Override
                 public void run() {
                     BluetoothLeService.eventOneExecuted = false;
+                    BluetoothLeService.eventTwoExecuted = false;
                 }
             };
             timer_resetButton.scheduleAtFixedRate(reset_task, 0, 10000);
@@ -391,7 +400,7 @@ public class DeviceControlActivity extends Activity {
         }
     }
 
-    public static void addToActivity(String docId, String userName) {
+    public static void addToActivity(String docId, String userName, Integer activity) {
         System.out.println("Adding to Actitity!");
         try {
             final String[] json_data = {""};
@@ -414,6 +423,7 @@ public class DeviceControlActivity extends Activity {
                 }
                 final String participants_final = updated_participants;
                 jobj.put("participant", participants_final);
+                jobj.put("activity", activity);
                 // send document to server (and show response from server)
                 dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
                     Log.d("dbPut:", participants_final);

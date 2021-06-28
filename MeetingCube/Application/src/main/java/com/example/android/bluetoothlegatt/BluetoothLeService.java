@@ -50,6 +50,7 @@ public class BluetoothLeService extends Service {
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
     public static boolean eventOneExecuted = false;
+    public static boolean eventTwoExecuted = false;
     // TODO: IMPLEMENT
 
 
@@ -64,21 +65,20 @@ public class BluetoothLeService extends Service {
     private static final int STATE_CONNECTED = 2;
 
     /**
-     * These are the settings for #1. Uncomment if building for smartphone #1
-     * **/
-    protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e01");
+     * These are the settings for #1. Uncomment if building for smartphone #1protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e01");
     protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc02");
     protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc03");
     protected static final String USER = "testuser";
+     **/
 
     /**
      * These are the settings for #2. Uncomment if building for smartphone #2
-     *
-     * protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e11");
-     * protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc22");
-     * protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc13");
-     * protected static final String USER = "testuser2";
      **/
+     protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e11");
+     protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc12");
+     protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc13");
+     protected static final String USER = "testuser2";
+
 
 
 
@@ -153,13 +153,23 @@ public class BluetoothLeService extends Service {
             // characteristic für den sensor input
             if (characteristic.getUuid().equals(CUBE_RETRIEVE_UUID)) {
                 Integer input = byteArrayToInt(characteristic.getValue()); // activity
+                System.out.println(input);
                 if(input == 1) {
                     if (!eventOneExecuted) {
                         System.out.println("Signal mit Code 1 empfangen");
-                        DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER);
+                        DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
                         eventOneExecuted = true;
                     }
                 }
+                if(input == 2) {
+                    if (!eventTwoExecuted) {
+                        System.out.println("Signal mit Code 2 empfangen");
+                        DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                        eventTwoExecuted = true;
+                    }
+                }
+
+
             }
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
