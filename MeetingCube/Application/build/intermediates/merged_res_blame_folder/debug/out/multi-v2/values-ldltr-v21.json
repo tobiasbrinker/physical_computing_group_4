@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "/home/tobias/.gradle/caches/transforms-2/files-2.1/c17b19e84b25df415084ac3501b4dab7/appcompat-v7-24.0.0/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "source": "/home/oliver/.gradle/caches/transforms-2/files-2.1/c17b19e84b25df415084ac3501b4dab7/appcompat-v7-24.0.0/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

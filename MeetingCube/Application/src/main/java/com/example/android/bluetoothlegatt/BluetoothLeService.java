@@ -51,6 +51,8 @@ public class BluetoothLeService extends Service {
     private BluetoothGatt mBluetoothGatt;
     public static boolean eventOneExecuted = false;
     public static boolean eventTwoExecuted = false;
+    public static boolean eventThreeExecuted = false;
+    public static boolean eventFourExectued = false;
     // TODO: IMPLEMENT
 
 
@@ -153,13 +155,18 @@ public class BluetoothLeService extends Service {
                 int input = byteArrayToInt(characteristic.getValue()); // activity
                 System.out.println(input);
                 switch (input) {
+                        // Button zum annehmen, wieder auflegen?
                     case 1:
                         if (!eventOneExecuted) {
+                            //TODO Bool einfügen der wenn unmuted den button zum auflegen bringt, sonst annehmen
+                            // .. if(activityAccepted).. drücken zum auflegen
+                            // else drücken zum annehmen
                             System.out.println("Signal mit Code 1 empfangen");
                             DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
                             eventOneExecuted = true;
                         }
                         break;
+                        // Heartbeat
                     case 2:
                         if (!eventTwoExecuted) {
                             System.out.println("Signal mit Code 2 empfangen");
@@ -167,6 +174,23 @@ public class BluetoothLeService extends Service {
                             eventTwoExecuted = true;
                         }
                         break;
+                        // Acc
+                    case 3:
+                        if (!eventThreeExecuted) {
+                            System.out.println("Signal mit Code 3 empfangen");
+                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            eventThreeExecuted = true;
+                        }
+                        break;
+                        // Scale
+                    case 4:
+                        if (!eventFourExectued) {
+                            System.out.println("Signal mit Code 4 empfangen");
+                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            eventFourExectued = true;
+                        }
+                        break;
+
                 }
             }
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);

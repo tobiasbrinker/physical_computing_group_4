@@ -4,8 +4,6 @@ com/example/android/bluetoothlegatt/SampleGattAttributes.java
  com.example.android.bluetoothlegatt.SampleGattAttributes
 com/example/android/bluetoothlegatt/BuildConfig.java
  com.example.android.bluetoothlegatt.BuildConfig
-com/example/android/bluetoothlegatt/FailureHandler.java
- com.example.android.bluetoothlegatt.FailureHandler
 com/example/android/bluetoothlegatt/DeviceScanActivity.java
  com.example.android.bluetoothlegatt.DeviceScanActivity
  com.example.android.bluetoothlegatt.DeviceScanActivity$1
@@ -13,6 +11,8 @@ com/example/android/bluetoothlegatt/DeviceScanActivity.java
  com.example.android.bluetoothlegatt.DeviceScanActivity$2$1
  com.example.android.bluetoothlegatt.DeviceScanActivity$LeDeviceListAdapter
  com.example.android.bluetoothlegatt.DeviceScanActivity$ViewHolder
+com/example/android/bluetoothlegatt/FailureHandler.java
+ com.example.android.bluetoothlegatt.FailureHandler
 com/example/android/bluetoothlegatt/DeviceControlActivity.java
  com.example.android.bluetoothlegatt.DeviceControlActivity
  com.example.android.bluetoothlegatt.DeviceControlActivity$1

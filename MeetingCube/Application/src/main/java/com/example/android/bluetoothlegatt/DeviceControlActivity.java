@@ -111,10 +111,10 @@ public class DeviceControlActivity extends Activity {
                             String response = doc.toString(2);
                             int activity = checkActivities(response);
                             byte[] value = new byte[1];
-                            //TODO change int
                             switch(activity) {
+
                                 case 1:
-                                    //TODO change button to real sensor
+                                    //TODO Button muss noch zu scale werden
                                     System.out.println("LED AN (BUTTON)");
                                     value[0] = (byte) (0x04);
                                     mBluetoothLeService.writeCustomCharacteristic(value);
@@ -124,8 +124,14 @@ public class DeviceControlActivity extends Activity {
                                     value[0] = (byte) (0x05);
                                     mBluetoothLeService.writeCustomCharacteristic(value);
                                     break;
+                                case 3:
+                                    System.out.println("LED AN (ACCELERATION)");
+                                    value[0] = (byte) (0x05);
+                                    mBluetoothLeService.writeCustomCharacteristic(value);
+                                    break;
                                 default:
-                                    System.out.println("LED AUS");
+                                    //TODO Button zum annehmen deaktivieren wenn default
+                                    System.out.println("ALLE LED'S AUS");
                                     value[0] = (byte) (0x00);
                                     mBluetoothLeService.writeCustomCharacteristic(value);
                                     break;
@@ -148,6 +154,9 @@ public class DeviceControlActivity extends Activity {
                 public void run() {
                     BluetoothLeService.eventOneExecuted = false;
                     BluetoothLeService.eventTwoExecuted = false;
+                    BluetoothLeService.eventThreeExecuted = false;
+                    BluetoothLeService.eventFourExectued = false;
+
                 }
             };
             timer_resetButton.scheduleAtFixedRate(reset_task, 0, 10000);
