@@ -29,6 +29,10 @@ byte rates[RATE_SIZE]; //Array of heart rates
 byte rateSpot = 0;
 long lastBeat = 0; //Time at which the last beat occurred
 
+
+//TODO SORTIEREN
+const int HX711_dout = 6; //mcu > HX711 dout pin
+const int HX711_sck = 10; //mcu > HX711 sck pin
 const int buttonInput = 5;
 const int signalRecievedLed = 12;
 const int ledOutput = 13;
@@ -40,6 +44,7 @@ int beatAvg;
 int heartbeat_signal_lock = 0;
 
 MAX30105 particleSensor;
+HX711_ADC LoadCell(HX711_dout, HX711_sck);
 
 // Für LED-Anzeige
 int buttonState = 0;
@@ -62,13 +67,15 @@ uint8_t TEST_SENSOR_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
 uint8_t TEST_RECIEVE_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
 0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x13};
 
-uint8_t sendSignalOne[] = {1};
-uint8_t sendSignalTwo[] = {2};
-uint8_t signalOne[1];
+uint8_t send_heartbeatactivity[] = {1};
+uint8_t send_scaleactivity[] = {2};
+uint8_t bluetooth_recieve_signal[1];
 
-byte inputSensorOne = {0x04};
-byte inputSensorTwo = {0x05};
+byte recieve_heartbeatactivity = {0x04};
+byte recieve_scaleactivity = {0x05};
 byte noSignal = {0x00};
+
+long t = 0;
                            
 
 // A small helper
@@ -84,12 +91,28 @@ void setup()
   pinMode(buttonInput, INPUT);
   // pinMode(ledOutput, OUTPUT);
   // pinMode(signalRecievedLed, OUTPUT);
-  pinMode(13, OUTPUT); //LED 1
-  pinMode(12, OUTPUT); //LED 2
-  pinMode(11, OUTPUT); //LED 3
-  pinMode(6, OUTPUT); //LED HEARTBEAT AUSGELÖST (bei anderen)
+  pinMode(13, OUTPUT); //LED 1  Schütteln
+  pinMode(12, OUTPUT); //LED 2  Waage
+  pinMode(11, OUTPUT); //LED 3  Herzfrequenz
+  Serial.begin(38400);
+
+
+  // SCALE SETUP
+  LoadCell.begin();
+  float calibrationValue; // calibration value (see example file "Calibration.ino")
+  calibrationValue = 696.0; // uncomment this if you want to set the calibration value in the sketch
+    unsigned long stabilizingtime = 2000; // preciscion right after power-up can be improved by adding a few seconds of stabilizing time
+  boolean _tare = true; //set this to false if you don't want tare to be performed in the next step
+  LoadCell.start(stabilizingtime, _tare);
+  if (LoadCell.getTareTimeoutFlag()) {
+    Serial.println("Timeout, check MCU>HX711 wiring and pin designations");
+    while (1);
+  }
+  else {
+    LoadCell.setCalFactor(calibrationValue); // set calibration value (float)
+    Serial.println("Startup is complete");
+  }
   
-  Serial.begin(115200);
  
   if ( !ble.begin(false) ) error(F("Couldn't find Bluefruit, make sure it's in CoMmanD mode & check wiring?")); 
   // Set to false for silent and true for debug
@@ -148,35 +171,62 @@ void printHex(uint8_t num) {
 }
 
 void loop() {
-  ble.update();
-  
-  gatt.getChar(testReadId, signalOne, sizeof(signalOne));
-  printHex(signalOne[0]);
+  static boolean newDataReady = 0;
+  const int serialPrintInterval = 0; //increase value to slow down serial print activity
+
+  // check for new data/start next conversion:
+  if (LoadCell.update()) newDataReady = true;
+
+  // get smoothed value from the dataset:
+  if (newDataReady) {
+    //TODO noch per Bluetooths schicken
+    
+    float j = LoadCell.getData();
+          if (j > 100) {
+      digitalWrite(12, HIGH);
+      }
+      /*
+    else {
+      digitalWrite(12, LOW);
+      }
+      */
+       
+  }
+
+
 
   
-  if (signalOne[0] == inputSensorOne)
+  ble.update();
+  
+  gatt.getChar(testReadId, bluetooth_recieve_signal, sizeof(bluetooth_recieve_signal));
+  printHex(bluetooth_recieve_signal[0]);
+
+  
+  if (bluetooth_recieve_signal[0] == recieve_heartbeatactivity)
   {
-    //LED an Port 12 = Jemand hat Lust auf Aktivität 2
+    //LED an Port 12 = Waage wurde bei jemand anderem ausgelöst
     digitalWrite(12, HIGH);
     Serial.println("Succes");
   }
-  if (signalOne[0] == inputSensorTwo) {
+  /*
+  if (bluetooth_recieve_signal[0] == recieve_scaleactivity) {
     digitalWrite(6, HIGH);
-
+  
   }
-  if (signalOne[0] == noSignal)
+  /*
+  // TODO alle signale ausstellen
+  /*if (bluetooth_recieve_signal[0] == noSignal)
   {
     digitalWrite(12, LOW);
-    digitalWrite(6, LOW);
   }
-  
+  */
  
   
   buttonState = digitalRead(buttonInput);
   if (buttonState == HIGH)
   {
     /* Set 100 as the characteristics */
-    gatt.setChar(testCharId, sendSignalOne, sizeof(sendSignalOne));
+    gatt.setChar(testCharId, send_heartbeatactivity, sizeof(send_heartbeatactivity));
     Serial.println("Button pressed!");
     
   } 
@@ -218,7 +268,7 @@ void loop() {
   */
   //wenn irvalue über 50000 für 5 sekunden würde ich den trigger senden
   if (irValue < 50000) {
-    Serial.print(" No finger?");
+    Serial.println(" No finger?");
   } else {
     if (sekundenCounter < 5000) {
       fingerCounter += 1;
@@ -229,7 +279,7 @@ void loop() {
     digitalWrite(11, HIGH);
     // sende 2 für heartbeat trigger
     Serial.println("Sende Trigger für Heartbeat");
-    gatt.setChar(testCharId, sendSignalTwo, sizeof(sendSignalTwo));
+    gatt.setChar(testCharId, send_scaleactivity, sizeof(send_scaleactivity));
 
   }
   else {
@@ -256,12 +306,8 @@ void loop() {
     //Serial.println();
   }
 
-      Serial.print("Finger");
-    Serial.println(sekundenCounter);
   //fingercounter wird hier auch zurück gesetzt
   if (sekundenCounter > 10000) {
-    Serial.print(triggerCounter);
-    Serial.println();
     sekundenCounter = 0;
     triggerCounter = 0;
     fingerCounter = 0;
@@ -273,9 +319,6 @@ void loop() {
   //hier wollt ihr den code reinschreiben. Wenn der triggerCounter auf 100 ist muss das signal gesendet werden an die anderen aduinos
   //led soll angehen,
   if (triggerCounter > 100) {
-    Serial.print ("trigger: ");
-    Serial.print(triggerCounter);
-    Serial.println();
     sekundenCounter = 0;
     triggerCounter = 0;
     digitalWrite(12, HIGH);
