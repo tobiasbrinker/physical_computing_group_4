@@ -21,9 +21,9 @@
 21
 22    <uses-sdk
 23        android:minSdkVersion="18"
-23-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml
+23-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml
 24        android:targetSdkVersion="24" />
-24-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml
+24-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml
 25
 26    <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
 27
@@ -36,65 +36,65 @@
 34    -->
 35d
 36    <uses-permission android:name="android.permission.BLUETOOTH" />
-36-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:31:5-67
-36-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:31:22-65
+36-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:31:5-67
+36-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:31:22-65
 37    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-37-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:32:5-73
-37-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:32:22-71
+37-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:32:5-73
+37-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:32:22-71
 38
 39    <uses-feature
-39-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:33:5-89
+39-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:33:5-89
 40        android:name="android.hardware.bluetooth_le"
-40-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:33:19-63
+40-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:33:19-63
 41        android:required="true" />
-41-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:33:64-87
+41-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:33:64-87
 42
 43    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-43-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:34:5-79
-43-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:34:22-76
+43-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:34:5-79
+43-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:34:22-76
 44    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-44-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:35:5-81
-44-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:35:22-78
+44-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:35:5-81
+44-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:35:22-78
 45    <uses-permission android:name="android.permission.INTERNET" />
-45-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:36:5-67
-45-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:36:22-64
+45-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:36:5-67
+45-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:36:22-64
 46
 47    <application
-47-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:39:5-51:19
+47-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:39:5-51:19
 48        android:debuggable="true"
 49        android:icon="@drawable/ic_launcher"
-49-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:40:9-45
+49-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:40:9-45
 50        android:label="@string/app_name"
-50-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:39:18-50
+50-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:39:18-50
 51        android:theme="@android:style/Theme.Holo.Light" >
-51-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:41:9-56
+51-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:41:9-56
 52        <activity
-52-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:42:9-48:20
+52-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:42:9-48:20
 53            android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
-53-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:42:19-53
+53-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:42:19-53
 54            android:label="@string/app_name" >
-54-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:43:13-45
+54-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:43:13-45
 55            <intent-filter>
-55-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:44:13-47:29
+55-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:44:13-47:29
 56                <action android:name="android.intent.action.MAIN" />
-56-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:45:17-68
-56-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:45:25-66
+56-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:45:17-68
+56-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:45:25-66
 57
 58                <category android:name="android.intent.category.LAUNCHER" />
-58-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:46:17-76
-58-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:46:27-74
+58-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:46:17-76
+58-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:46:27-74
 59            </intent-filter>
 60        </activity>
 61        <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity" />
-61-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:49:9-58
-61-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:49:19-56
+61-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:49:9-58
+61-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:49:19-56
 62
 63        <service
-63-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:50:9-77
+63-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:50:9-77
 64            android:name="com.example.android.bluetoothlegatt.BluetoothLeService"
-64-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:50:18-52
+64-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:50:18-52
 65            android:enabled="true" />
-65-->/home/oliver/Documents/uni_hannover/physical_computing_lab/physical_computing_group_4/MeetingCube/Application/src/main/AndroidManifest.xml:50:53-75
+65-->/home/tobias/Desktop/Physical_Computing/git/MeetingCube/Application/src/main/AndroidManifest.xml:50:53-75
 66    </application>
 67
 68</manifest>

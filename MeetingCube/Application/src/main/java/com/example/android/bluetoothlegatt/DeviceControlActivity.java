@@ -126,7 +126,7 @@ public class DeviceControlActivity extends Activity {
                                     break;
                                 case 3:
                                     System.out.println("LED AN (ACCELERATION)");
-                                    value[0] = (byte) (0x05);
+                                    value[0] = (byte) (0x06);
                                     mBluetoothLeService.writeCustomCharacteristic(value);
                                     break;
                                 default:
@@ -155,8 +155,8 @@ public class DeviceControlActivity extends Activity {
                     BluetoothLeService.eventOneExecuted = false;
                     BluetoothLeService.eventTwoExecuted = false;
                     BluetoothLeService.eventThreeExecuted = false;
-                    BluetoothLeService.eventFourExectued = false;
-
+                    BluetoothLeService.eventFourExecuted = false;
+                    BluetoothLeService.eventFiveExecuted = false;
                 }
             };
             timer_resetButton.scheduleAtFixedRate(reset_task, 0, 10000);
@@ -408,8 +408,39 @@ public class DeviceControlActivity extends Activity {
         }
     }
 
-    public static void addToActivity(String docId, String userName, Integer activity) {
-        System.out.println("Adding to Actitity!");
+    public static void removeFromActivity(String docId, String userName) {
+        System.out.println("Removing from activity!");
+        try {
+            final String[] json_data = {""};
+            dbGet(dbUrl + docId, (JSONObject doc) -> {
+                json_data[0] = doc.toString(2);
+            }, (Exception ex) -> {
+                // show message if there was a problem
+                Log.d("removeFromActivitydbget", ex.toString());
+            });
+
+            String updated_participants = "";
+            String doc = json_data[0];
+            if (doc != "") {
+                JSONObject jobj = new JSONObject(doc);
+                String participants = jobj.get("participant").toString();
+                final String participants_final = participants.replace("," + userName, "");
+                System.out.println(participants_final);
+                jobj.put("participant", participants_final);
+                // send document to server (and show response from server)
+                dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
+                    Log.d("dbPut:", participants_final);
+                }, null);
+            } else {
+                Log.d("removeFromActivityJSON", "Could not get JSON Data!");
+            }
+        } catch (JSONException ex) {
+            Log.d("removeFromActivitydbPut", ex.toString());
+        }
+    }
+    // TODO: Nicht hinzufügen falls schon vorhanden
+    public static void addToActivity(String docId, String userName) {
+        System.out.println("Adding to actitity!");
         try {
             final String[] json_data = {""};
             dbGet(dbUrl + docId, (JSONObject doc) -> {
@@ -431,7 +462,6 @@ public class DeviceControlActivity extends Activity {
                 }
                 final String participants_final = updated_participants;
                 jobj.put("participant", participants_final);
-                jobj.put("activity", activity);
                 // send document to server (and show response from server)
                 dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
                     Log.d("dbPut:", participants_final);
@@ -441,6 +471,35 @@ public class DeviceControlActivity extends Activity {
             }
         } catch (JSONException ex) {
             Log.d("addToActivitydbPut", ex.toString());
+        }
+    }
+    public static void startNewActivity(String docId, String userName, Integer activity) {
+        System.out.println("Starting new activity!");
+        try {
+            final String[] json_data = {""};
+            dbGet(dbUrl + docId, (JSONObject doc) -> {
+                json_data[0] = doc.toString(2);
+            }, (Exception ex) -> {
+                // show message if there was a problem
+                Log.d("startNewActivitydbget", ex.toString());
+            });
+
+            String updated_participants = "";
+            String doc = json_data[0];
+            if (doc != "") {
+                JSONObject jobj = new JSONObject(doc);
+                jobj.put("participant", userName);
+                jobj.put("activity", activity);
+                // send document to server (and show response from server)
+                dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
+                    Log.d("dbPut user:", userName);
+                    Log.d("dbPut activity:", String.valueOf(activity));
+                }, null);
+            } else {
+                Log.d("startNewActivityJSON", "Could not get JSON Data!");
+            }
+        } catch (JSONException ex) {
+            Log.d("startNewActivitydbPut", ex.toString());
         }
     }
 

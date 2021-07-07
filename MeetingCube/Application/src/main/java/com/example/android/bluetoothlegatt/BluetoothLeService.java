@@ -52,7 +52,8 @@ public class BluetoothLeService extends Service {
     public static boolean eventOneExecuted = false;
     public static boolean eventTwoExecuted = false;
     public static boolean eventThreeExecuted = false;
-    public static boolean eventFourExectued = false;
+    public static boolean eventFourExecuted = false;
+    public static boolean eventFiveExecuted = false;
     // TODO: IMPLEMENT
 
 
@@ -66,19 +67,18 @@ public class BluetoothLeService extends Service {
     private static final int STATE_CONNECTING = 1;
     private static final int STATE_CONNECTED = 2;
 
+    /**
      //These are the settings for #1. Uncomment if building for smartphone #1
      protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e01");
     protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc02");
     protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc03");
     protected static final String USER = "testuser";
-
-    /**
-     * These are the settings for #2. Uncomment if building for smartphone #2
+    **/
+     // These are the settings for #2. Uncomment if building for smartphone #2
      protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e11");
      protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc12");
      protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc13");
-     protected static final String USER = "testuser2";     **/
-
+     protected static final String USER = "testuser2";
 
 
 
@@ -152,45 +152,46 @@ public class BluetoothLeService extends Service {
                                             BluetoothGattCharacteristic characteristic) {
             // characteristic für den sensor input
             if (characteristic.getUuid().equals(CUBE_RETRIEVE_UUID)) {
-                int input = byteArrayToInt(characteristic.getValue()); // activity
-                System.out.println(input);
-                switch (input) {
-                        // Button zum annehmen, wieder auflegen?
-                    case 1:
+                int activity = byteArrayToInt(characteristic.getValue()); // activity
+                switch (activity) {
+                    case 1: // Heartbeat
                         if (!eventOneExecuted) {
                             //TODO Bool einfügen der wenn unmuted den button zum auflegen bringt, sonst annehmen
                             // .. if(activityAccepted).. drücken zum auflegen
                             // else drücken zum annehmen
-                            System.out.println("Signal mit Code 1 empfangen");
-                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            System.out.println("Signal mit Code 1 (Heartbeat) empfangen");
+                            DeviceControlActivity.startNewActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, activity);
                             eventOneExecuted = true;
                         }
                         break;
-                        // Heartbeat
-                    case 2:
+                    case 2: // Scale
                         if (!eventTwoExecuted) {
-                            System.out.println("Signal mit Code 2 empfangen");
-                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            System.out.println("Signal mit Code 2 (Waage) empfangen");
+                            DeviceControlActivity.startNewActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, activity);
                             eventTwoExecuted = true;
                         }
                         break;
-                        // Acc
-                    case 3:
+                    case 3: // Shake
                         if (!eventThreeExecuted) {
-                            System.out.println("Signal mit Code 3 empfangen");
-                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
+                            System.out.println("Signal mit Code 3 (Shake) empfangen");
+                            DeviceControlActivity.startNewActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, activity);
                             eventThreeExecuted = true;
                         }
                         break;
-                        // Scale
-                    case 4:
-                        if (!eventFourExectued) {
-                            System.out.println("Signal mit Code 4 empfangen");
-                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER, input);
-                            eventFourExectued = true;
+                    case 4: // Button press (Join)
+                        if (!eventFourExecuted) {
+                            System.out.println("Signal mit Code 4(Join) empfangen");
+                            DeviceControlActivity.addToActivity(DeviceControlActivity.tvDocId.getText().toString(), USER);
+                            eventFourExecuted = true;
                         }
                         break;
-
+                    case 5: // Button press long (Remove)
+                        if (!eventFiveExecuted) {
+                            System.out.println("Signal mit Code 5(Remove) empfangen");
+                            DeviceControlActivity.removeFromActivity(DeviceControlActivity.tvDocId.getText().toString(), USER);
+                            eventFiveExecuted = true;
+                        }
+                        break;
                 }
             }
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
