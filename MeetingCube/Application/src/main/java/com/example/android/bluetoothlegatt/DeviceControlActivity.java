@@ -112,7 +112,6 @@ public class DeviceControlActivity extends Activity {
                             int activity = checkActivities(response);
                             byte[] value = new byte[1];
                             switch(activity) {
-
                                 case 1:
                                     //TODO Button muss noch zu scale werden
                                     System.out.println("LED AN (BUTTON)");
@@ -419,18 +418,29 @@ public class DeviceControlActivity extends Activity {
                 Log.d("removeFromActivitydbget", ex.toString());
             });
 
-            String updated_participants = "";
             String doc = json_data[0];
             if (doc != "") {
                 JSONObject jobj = new JSONObject(doc);
                 String participants = jobj.get("participant").toString();
-                final String participants_final = participants.replace("," + userName, "");
-                System.out.println(participants_final);
-                jobj.put("participant", participants_final);
-                // send document to server (and show response from server)
-                dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
-                    Log.d("dbPut:", participants_final);
-                }, null);
+                int count = participants.length() - participants.replace(",", "").length();
+                if (count == 0) { // only user active
+                    jobj.put("participant", "");
+                    jobj.put("activity", "0");
+
+                    // send document to server (and show response from server)
+                    dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
+                        Log.d("dbPut participants:", "");
+                        Log.d("dbPut activity:", "0");
+                    }, null);
+                } else {
+                    final String participants_final = participants.replace("," + userName, "");
+                    jobj.put("participant", participants_final);
+
+                    // send document to server (and show response from server)
+                    dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
+                        Log.d("dbPut:", participants_final);
+                    }, null);
+                }
             } else {
                 Log.d("removeFromActivityJSON", "Could not get JSON Data!");
             }

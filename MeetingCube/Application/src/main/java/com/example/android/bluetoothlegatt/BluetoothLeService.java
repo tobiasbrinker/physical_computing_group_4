@@ -147,6 +147,9 @@ public class BluetoothLeService extends Service {
             }
         }
 
+        // TODO: KEIN USER MEHR IN PARTICIPANTS => activity == 0 , alle LEDs aus
+        // TODO: Feedback ich bin gejoint
+        // TODO: Shakesensor anschließen
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
