@@ -7,66 +7,54 @@
 #include <HX711_ADC.h>
 #include "heartRate.h"
 
-// TODO: Code aufräumen!
-
-
 #define BLUEFRUIT_SPI_CS               8
 #define BLUEFRUIT_SPI_IRQ              7
 #define BLUEFRUIT_SPI_RST              4
-
-// If set to 'true' enables debug output
-#define VERBOSE_MODE                   true  
+#define VERBOSE_MODE                   true // If set to 'true' enables debug output  
 #define FACTORYRESET_ENABLE            0
 
+// -------- Shake sensor --------
 const int acc_X = A3;
 const int acc_Y = A4;
 const int acc_Z = A5;
+int shakeTriggerCounter = 0;
 
-int sekundenCounter = 0;
-int triggerCounter = 0;
-int fingerCounter = 0;
-
+// -------- Heartbeatsensor --------
 const byte RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
 byte rates[RATE_SIZE]; //Array of heart rates
 byte rateSpot = 0;
 long lastBeat = 0; //Time at which the last beat occurred
-
-
-//TODO SORTIEREN
-const int HX711_dout = 6; //mcu > HX711 dout pin
-const int HX711_sck = 10; //mcu > HX711 sck pin
-const int buttonInput = 5;
-const int signalReceivedLed = 12;
-const int ledOutput = 13;
-int sendSignal = 0;
-
 float beatsPerMinute;
 int beatAvg;
+int beatTriggerCounter = 0;
+MAX30105 heartbeatSensor;
 
-int heartbeat_signal_lock = 0;
-int longButtonPressCounter = 0;
-
-MAX30105 particleSensor;
+// -------- Scalesensor --------
+const int HX711_dout = 6; //mcu > HX711 dout pin
+const int HX711_sck = 10; //mcu > HX711 sck pin
 HX711_ADC LoadCell(HX711_dout, HX711_sck);
 
-// Für LED-Anzeige
+// -------- Button --------
+const int buttonInput = 5;
+int longButtonPressCounter = 0;
 int buttonState = 0;
 
+// -------- Zeit --------
+int sekundenCounter = 0;
+
+// -------- Bluetooth Connection --------
 Adafruit_BluefruitLE_SPI ble(BLUEFRUIT_SPI_CS, BLUEFRUIT_SPI_IRQ, BLUEFRUIT_SPI_RST);
 Adafruit_BLEGatt gatt(ble);
 
-/* this is for bluetooth */
 
 int32_t testServiceId;
 int32_t testCharId;
 int32_t testReadId;
 
 uint8_t SEND_SERVICE_UUID[] = {0xF5,0x61,0x7C,0xD1,0x38,0xE8,0x4E,0x45,
-                           0xAD,0x46,0x63,0xB7, 0xD0,0xDB,0x0E,0x11};
-                          
+                           0xAD,0x46,0x63,0xB7, 0xD0,0xDB,0x0E,0x11};              
 uint8_t TEST_SENSOR_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
                            0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x12};
-
 uint8_t TEST_RECEIVE_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
 0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x13};
 
@@ -88,28 +76,24 @@ byte receive_shakeactivity_andjoined = {0x09};
 
 uint8_t bluetooth_receive_signal[1];
 byte noSignal = {0x00};
-
-long t = 0;
-
-                           
-
-// A small helper
+                      
 void error(const __FlashStringHelper*err) {
   Serial.println(err);
   while (1);
 }
 
+
+// -------------------------------- SETUP --------------------------------
 void setup()
 {
   delay(500);
   
   pinMode(buttonInput, INPUT);
-  // pinMode(ledOutput, OUTPUT);
-  // pinMode(signalReceivedLed, OUTPUT);
   pinMode(13, OUTPUT); //LED 1  Schütteln
   pinMode(12, OUTPUT); //LED 2  Waage
   pinMode(11, OUTPUT); //LED 3  Herzfrequenz
   pinMode(9, OUTPUT); //LED 4  Activity Joined
+  
   Serial.begin(38400);
 
 
@@ -129,7 +113,7 @@ void setup()
     Serial.println("Startup is complete");
   }
   
- 
+  // BLUETOOTH SETUP
   if ( !ble.begin(false) ) error(F("Couldn't find Bluefruit, make sure it's in CoMmanD mode & check wiring?")); 
   // Set to false for silent and true for debug
   
@@ -164,21 +148,20 @@ void setup()
   Serial.print(F("Performing a SW reset (service changes require a reset): "));
   //ble.reset();
 
-  
-   if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
+  // HEARTBEAT SETUP
+  if (!heartbeatSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
   {
     Serial.println("MAX30105 was not found. Please check wiring/power. ");
   }
   Serial.println("Place your index finger on the sensor with steady pressure.");
-
-  particleSensor.setup(); //Configure sensor with default settings
-  particleSensor.setPulseAmplitudeRed(0x0A); //Turn Red LED to low to indicate sensor is running
-  particleSensor.setPulseAmplitudeGreen(0); //Turn off Green LED
+  heartbeatSensor.setup(); //Configure sensor with default settings
+  heartbeatSensor.setPulseAmplitudeRed(0x0A); //Turn Red LED to low to indicate sensor is running
+  heartbeatSensor.setPulseAmplitudeGreen(0); //Turn off Green LED
 
   ble.reset();
 }
 
-
+// -------------------------------- LOOP --------------------------------
 void printHex(uint8_t num) {
   char hexCar[2];
 
@@ -188,7 +171,6 @@ void printHex(uint8_t num) {
 
 void loop() {
   static boolean newDataReady = 0;
-  const int serialPrintInterval = 0; //increase value to slow down serial print activity
 
   // ---------------------- LEDs ----------------------
   ble.update();
@@ -226,13 +208,6 @@ void loop() {
   } else {
     digitalWrite(9, LOW);
   }
-  /*
-  // TODO alle signale ausstellen
-  /*if (bluetooth_receive_signal[0] == noSignal)
-  {
-    digitalWrite(12, LOW);
-  }
-  */
 
   // ---------------------- SCALE ----------------------
   // check for new data/start next conversion:
@@ -265,7 +240,7 @@ void loop() {
 
   
   // ---------------------- HEARTBEAT ----------------------
-  long irValue = particleSensor.getIR();
+  long irValue = heartbeatSensor.getIR();
   if (checkForBeat(irValue) == true)
   {
     //We sensed a beat!
@@ -299,16 +274,12 @@ void loop() {
   if (irValue < 50000) {
     //Serial.println(" No finger?");
   } else {
-    if (sekundenCounter < 5000) {
-      fingerCounter += 1;
-    } 
+    beatTriggerCounter += 1;
   }
-  if (fingerCounter > 150) {
-    // hier stattdessen das signal senden
-    //digitalWrite(11, HIGH);
-    // sende 2 für heartbeat trigger
+  if (beatTriggerCounter > 150) {
     Serial.println("Sende Trigger für Heartbeat");
     gatt.setChar(testCharId, send_heartbeatactivity, sizeof(send_heartbeatactivity));
+    beatTriggerCounter = 0;
 
   }
   else {
@@ -317,16 +288,16 @@ void loop() {
 
   
   // ---------------------- SHAKE SENSOR ----------------------
+  // TODO: Besser einstellen
   if (analogRead(acc_X) < 450 || analogRead(acc_X) > 600) {
-    triggerCounter = triggerCounter + 1;
+    shakeTriggerCounter = shakeTriggerCounter + 1;
   }
   if (analogRead(acc_Y) < 100 || analogRead(acc_Y) > 500) {
-    //triggerCounter = triggerCounter + 1;
+    //shakeTriggerCounter = shakeTriggerCounter + 1;
   }
   if (analogRead(acc_Z) < 100 || analogRead(acc_Z) > 700) {
-    triggerCounter = triggerCounter + 1;
+    shakeTriggerCounter = shakeTriggerCounter + 1;
   }
-
   /*
   Serial.print ("X:");
   Serial.print(analogRead(acc_X));
@@ -335,10 +306,10 @@ void loop() {
   Serial.print ("Z:");
   Serial.print(analogRead(acc_Z));
   Serial.print (" Counter:");
-  Serial.print(triggerCounter);
+  Serial.print(shakeTriggerCounter);
   Serial.println();*/
-  if (triggerCounter > 20) {
-    triggerCounter = 0;
+  if (shakeTriggerCounter > 20) {
+    shakeTriggerCounter = 0;
     gatt.setChar(testCharId, send_shakeactivity, sizeof(send_shakeactivity));
     Serial.println("Send Trigger for Shake");
   }
@@ -346,9 +317,8 @@ void loop() {
   // ---------------------- RESET ----------------------
   if (sekundenCounter > 5000) {
     sekundenCounter = 0;
-    triggerCounter = 0;
-    fingerCounter = 0;
-    heartbeat_signal_lock = 0;
+    shakeTriggerCounter = 0;
+    beatTriggerCounter = 0;
     longButtonPressCounter = 0;
   } 
   sekundenCounter = sekundenCounter + 10;
