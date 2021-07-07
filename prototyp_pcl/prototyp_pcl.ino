@@ -19,6 +19,18 @@ const int acc_Y = A4;
 const int acc_Z = A5;
 int shakeTriggerCounter = 0;
 
+const int numreadings = 10;
+int readIndex = 0;  
+
+int readings_x[numreadings];             
+int total_x = 0;                  
+int average_x = 0;                
+
+int readings_y[numreadings];     
+int total_y = 0;                  
+int average_y = 0;             
+
+
 // -------- Heartbeatsensor --------
 const byte RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
 byte rates[RATE_SIZE]; //Array of heart rates
@@ -158,6 +170,14 @@ void setup()
   heartbeatSensor.setPulseAmplitudeRed(0x0A); //Turn Red LED to low to indicate sensor is running
   heartbeatSensor.setPulseAmplitudeGreen(0); //Turn off Green LED
 
+  // SHAKE SETUP
+  for (int thisReading = 0; thisReading < numreadings; thisReading++) {
+    readings_x[thisReading] = 0;
+  }
+  for (int thisReading = 0; thisReading < numreadings; thisReading++) {
+    readings_y[thisReading] = 0;
+  }
+  
   ble.reset();
 }
 
@@ -254,7 +274,7 @@ void loop() {
       rates[rateSpot++] = (byte)beatsPerMinute; //Store this reading in the array
       rateSpot %= RATE_SIZE; //Wrap variable
 
-      //Take average of readings
+      //Take average_x of readings_x
       beatAvg = 0;
       for (byte x = 0 ; x < RATE_SIZE ; x++)
         beatAvg += rates[x];
@@ -288,15 +308,32 @@ void loop() {
 
   
   // ---------------------- SHAKE SENSOR ----------------------
-  // TODO: Besser einstellen
-  if (analogRead(acc_X) < 450 || analogRead(acc_X) > 600) {
-    shakeTriggerCounter = shakeTriggerCounter + 1;
+  // average x
+  total_x = total_x - readings_x[readIndex];
+  readings_x[readIndex] = analogRead(acc_X);
+  total_x = total_x + readings_x[readIndex];
+  average_x = total_x / numreadings;
+  
+  // average y
+  total_y = total_y - readings_y[readIndex];
+  readings_y[readIndex] = analogRead(acc_Y);
+  total_y = total_y + readings_y[readIndex];
+  average_y = total_y / numreadings;
+
+  readIndex = readIndex + 1;
+  if (readIndex >= numreadings) {
+    readIndex = 0;
   }
-  if (analogRead(acc_Y) < 100 || analogRead(acc_Y) > 500) {
-    //shakeTriggerCounter = shakeTriggerCounter + 1;
+
+  // check sensor values
+  int acc_X_value = analogRead(acc_X);
+  int acc_Y_value = analogRead(acc_Y);
+
+  if (abs(acc_X_value-average_x) > 50) {
+    shakeTriggerCounter += 1;
   }
-  if (analogRead(acc_Z) < 100 || analogRead(acc_Z) > 700) {
-    shakeTriggerCounter = shakeTriggerCounter + 1;
+  if (abs(acc_Y_value-average_y) > 70) {
+    shakeTriggerCounter += 1;
   }
   /*
   Serial.print ("X:");
