@@ -18,9 +18,9 @@
 #define VERBOSE_MODE                   true  
 #define FACTORYRESET_ENABLE            0
 
-const int acc_X = A2;
-const int acc_Y = A3;
-const int acc_Z = A3;
+const int acc_X = A3;
+const int acc_Y = A4;
+const int acc_Z = A5;
 
 int sekundenCounter = 0;
 int triggerCounter = 0;
@@ -196,6 +196,8 @@ void loop() {
   gatt.getChar(testReadId, bluetooth_receive_signal, sizeof(bluetooth_receive_signal));
   printHex(bluetooth_receive_signal[0]);
 
+
+  //Serial.println(bluetooth_receive_signal[0]);
   // Heartbeat LED
   if ((bluetooth_receive_signal[0] == receive_heartbeatactivity) || (bluetooth_receive_signal[0] == receive_heartbeatactivity_andjoined))
   {
@@ -315,24 +317,30 @@ void loop() {
 
   
   // ---------------------- SHAKE SENSOR ----------------------
-  if (analogRead(acc_X) < 100 || analogRead(acc_X) > 500) {
+  if (analogRead(acc_X) < 450 || analogRead(acc_X) > 600) {
     triggerCounter = triggerCounter + 1;
   }
-  /*
-      Serial.print ("X:");
-    Serial.print(analogRead(acc_X));
-    Serial.println();
-     Serial.print ("Y:");
-    Serial.print(analogRead(acc_Y));
-    Serial.println();*/
   if (analogRead(acc_Y) < 100 || analogRead(acc_Y) > 500) {
+    //triggerCounter = triggerCounter + 1;
+  }
+  if (analogRead(acc_Z) < 100 || analogRead(acc_Z) > 700) {
     triggerCounter = triggerCounter + 1;
   }
-  if (analogRead(acc_Z) < 50 || analogRead(acc_Z) > 400) {
-    //triggerCounter = triggerCounter + 1;
-    //Serial.print ("Z:");
-    //Serial.print(analogRead(pinz));
-    //Serial.println();
+
+  /*
+  Serial.print ("X:");
+  Serial.print(analogRead(acc_X));
+  Serial.print ("Y:");
+  Serial.print(analogRead(acc_Y));
+  Serial.print ("Z:");
+  Serial.print(analogRead(acc_Z));
+  Serial.print (" Counter:");
+  Serial.print(triggerCounter);
+  Serial.println();*/
+  if (triggerCounter > 20) {
+    triggerCounter = 0;
+    gatt.setChar(testCharId, send_shakeactivity, sizeof(send_shakeactivity));
+    Serial.println("Send Trigger for Shake");
   }
 
   // ---------------------- RESET ----------------------
@@ -345,15 +353,4 @@ void loop() {
   } 
   sekundenCounter = sekundenCounter + 10;
   //Serial.println(sekundenCounter);
-
-  //hier wollt ihr den code reinschreiben. Wenn der triggerCounter auf 100 ist muss das signal gesendet werden an die anderen aduinos
-  //led soll angehen,
-  if (triggerCounter > 100) {
-    sekundenCounter = 0;
-    triggerCounter = 0;
-    //digitalWrite(12, HIGH);
-  }
-  else {
-    //digitalWrite(12, LOW);
-  }
 }

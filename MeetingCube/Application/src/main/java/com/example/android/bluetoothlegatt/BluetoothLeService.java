@@ -147,7 +147,6 @@ public class BluetoothLeService extends Service {
             }
         }
         
-        // TODO: Shakesensor anschließen
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
