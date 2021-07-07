@@ -82,6 +82,10 @@ byte receive_heartbeatactivity = {0x04};
 byte receive_scaleactivity = {0x05};
 byte receive_shakeactivity = {0x06};
 
+byte receive_heartbeatactivity_andjoined = {0x07};
+byte receive_scaleactivity_andjoined = {0x08};
+byte receive_shakeactivity_andjoined = {0x09};
+
 uint8_t bluetooth_receive_signal[1];
 byte noSignal = {0x00};
 
@@ -105,6 +109,7 @@ void setup()
   pinMode(13, OUTPUT); //LED 1  Schütteln
   pinMode(12, OUTPUT); //LED 2  Waage
   pinMode(11, OUTPUT); //LED 3  Herzfrequenz
+  pinMode(9, OUTPUT); //LED 4  Activity Joined
   Serial.begin(38400);
 
 
@@ -192,23 +197,32 @@ void loop() {
   printHex(bluetooth_receive_signal[0]);
 
   // Heartbeat LED
-  if (bluetooth_receive_signal[0] == receive_heartbeatactivity)
+  if ((bluetooth_receive_signal[0] == receive_heartbeatactivity) || (bluetooth_receive_signal[0] == receive_heartbeatactivity_andjoined))
   {
     digitalWrite(11, HIGH);
   } else {
     digitalWrite(11, LOW);
   }
   // SCALE LED
-  if (bluetooth_receive_signal[0] == receive_scaleactivity) {
+  if ((bluetooth_receive_signal[0] == receive_scaleactivity) || (bluetooth_receive_signal[0] == receive_scaleactivity_andjoined))
+  {
     digitalWrite(12, HIGH);
   } else {
     digitalWrite(12, LOW);
   }
   // SHAKE LED
-  if (bluetooth_receive_signal[0] == receive_shakeactivity) {
+  if ((bluetooth_receive_signal[0] == receive_shakeactivity) || (bluetooth_receive_signal[0] == receive_shakeactivity_andjoined))
+  {
     digitalWrite(13, HIGH);
   } else {
     digitalWrite(13, LOW);
+  }
+  // Activity joined LED
+  if ((bluetooth_receive_signal[0] == receive_heartbeatactivity_andjoined) || (bluetooth_receive_signal[0] == receive_scaleactivity_andjoined) || (bluetooth_receive_signal[0] == receive_shakeactivity_andjoined))
+  {
+    digitalWrite(9, HIGH);
+  } else {
+    digitalWrite(9, LOW);
   }
   /*
   // TODO alle signale ausstellen

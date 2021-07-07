@@ -113,23 +113,33 @@ public class DeviceControlActivity extends Activity {
                             byte[] value = new byte[1];
                             switch(activity) {
                                 case 1:
-                                    //TODO Button muss noch zu scale werden
-                                    System.out.println("LED AN (BUTTON)");
-                                    value[0] = (byte) (0x04);
+                                    System.out.println("LED AN (HEARBEAT)");
+                                    if(userJoined(tvDocId.getText().toString(), mBluetoothLeService.USER)) {
+                                        value[0] = (byte) (0x07);
+                                    } else {
+                                        value[0] = (byte) (0x04);
+                                    }
                                     mBluetoothLeService.writeCustomCharacteristic(value);
                                     break;
                                 case 2:
-                                    System.out.println("LED AN (HEARBEAT)");
-                                    value[0] = (byte) (0x05);
+                                    System.out.println("LED AN (SCALE)");
+                                    if(userJoined(tvDocId.getText().toString(), mBluetoothLeService.USER)) {
+                                        value[0] = (byte) (0x08);
+                                    } else {
+                                        value[0] = (byte) (0x05);
+                                    }
                                     mBluetoothLeService.writeCustomCharacteristic(value);
                                     break;
                                 case 3:
-                                    System.out.println("LED AN (ACCELERATION)");
-                                    value[0] = (byte) (0x06);
+                                    System.out.println("LED AN (SHAKE)");
+                                    if(userJoined(tvDocId.getText().toString(), mBluetoothLeService.USER)) {
+                                        value[0] = (byte) (0x09);
+                                    } else {
+                                        value[0] = (byte) (0x06);
+                                    }
                                     mBluetoothLeService.writeCustomCharacteristic(value);
                                     break;
                                 default:
-                                    //TODO Button zum annehmen deaktivieren wenn default
                                     System.out.println("ALLE LED'S AUS");
                                     value[0] = (byte) (0x00);
                                     mBluetoothLeService.writeCustomCharacteristic(value);
@@ -405,6 +415,35 @@ public class DeviceControlActivity extends Activity {
             mBluetoothLeService.writeCustomCharacteristic(value);
 
         }
+    }
+
+    public static boolean userJoined(String docId, String userName) {
+        try {
+            final String[] json_data = {""};
+            dbGet(dbUrl + docId, (JSONObject doc) -> {
+                json_data[0] = doc.toString(2);
+            }, (Exception ex) -> {
+                // show message if there was a problem
+                Log.d("userJoineddbget", ex.toString());
+            });
+
+            String updated_participants = "";
+            String doc = json_data[0];
+            if (doc != "") {
+                JSONObject jobj = new JSONObject(doc);
+                String participants = jobj.get("participant").toString();
+                if(participants.toLowerCase().contains(userName.toLowerCase())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                Log.d("userJoinedJSON", "Could not get JSON Data!");
+            }
+        } catch (JSONException ex) {
+            Log.d("userJoineddbPut", ex.toString());
+        }
+        return false;
     }
 
     public static void removeFromActivity(String docId, String userName) {

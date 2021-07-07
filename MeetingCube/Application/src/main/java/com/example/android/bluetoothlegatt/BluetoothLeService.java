@@ -78,7 +78,7 @@ public class BluetoothLeService extends Service {
      protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e11");
      protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc12");
      protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc13");
-     protected static final String USER = "testuser2";
+     public static final String USER = "testuser2";
 
 
 
@@ -146,9 +146,7 @@ public class BluetoothLeService extends Service {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
         }
-
-        // TODO: KEIN USER MEHR IN PARTICIPANTS => activity == 0 , alle LEDs aus
-        // TODO: Feedback ich bin gejoint
+        
         // TODO: Shakesensor anschließen
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
