@@ -438,7 +438,7 @@ public class DeviceControlActivity extends Activity {
             Log.d("removeFromActivitydbPut", ex.toString());
         }
     }
-    // TODO: Nicht hinzufügen falls schon vorhanden
+
     public static void addToActivity(String docId, String userName) {
         System.out.println("Adding to actitity!");
         try {
@@ -455,10 +455,14 @@ public class DeviceControlActivity extends Activity {
             if (doc != "") {
                 JSONObject jobj = new JSONObject(doc);
                 String participants = jobj.get("participant").toString();
-                if (participants == "") {
-                    updated_participants = new StringBuilder().append(participants).append(userName).toString();
+                if(participants.toLowerCase().contains(userName.toLowerCase())) {
+                    updated_participants = participants;
                 } else {
-                    updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
+                    if (participants == "") {
+                        updated_participants = new StringBuilder().append(participants).append(userName).toString();
+                    } else {
+                        updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
+                    }
                 }
                 final String participants_final = updated_participants;
                 jobj.put("participant", participants_final);
@@ -473,6 +477,7 @@ public class DeviceControlActivity extends Activity {
             Log.d("addToActivitydbPut", ex.toString());
         }
     }
+
     public static void startNewActivity(String docId, String userName, Integer activity) {
         System.out.println("Starting new activity!");
         try {

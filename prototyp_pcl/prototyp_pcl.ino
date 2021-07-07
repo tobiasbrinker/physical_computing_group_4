@@ -189,7 +189,6 @@ void loop() {
   gatt.getChar(testReadId, bluetooth_receive_signal, sizeof(bluetooth_receive_signal));
   printHex(bluetooth_receive_signal[0]);
 
-  Serial.println(bluetooth_receive_signal[0]);
   // Heartbeat LED
   if (bluetooth_receive_signal[0] == receive_heartbeatactivity)
   {
