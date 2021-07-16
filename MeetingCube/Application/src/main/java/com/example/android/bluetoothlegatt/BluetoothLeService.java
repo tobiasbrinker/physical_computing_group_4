@@ -67,18 +67,17 @@ public class BluetoothLeService extends Service {
     private static final int STATE_CONNECTING = 1;
     private static final int STATE_CONNECTED = 2;
 
-    /**
      //These are the settings for #1. Uncomment if building for smartphone #1
      protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e01");
     protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc02");
     protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc03");
     protected static final String USER = "testuser";
-    **/
+
      // These are the settings for #2. Uncomment if building for smartphone #2
-     protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e11");
+     /*protected static final UUID CUBE_SERVICE_UUID = UUID.fromString("f5617cd1-38e8-4e45-ad46-63b7d0db0e11");
      protected static final UUID CUBE_RETRIEVE_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc12");
      protected static final UUID CUBE_SEND_UUID = UUID.fromString("398c26b3-c10d-4cf0-abd2-39b7914ffc13");
-     public static final String USER = "testuser2";
+     public static final String USER = "Jan2021";*/
 
 
 
@@ -188,7 +187,9 @@ public class BluetoothLeService extends Service {
                     case 5: // Button press long (Remove)
                         if (!eventFiveExecuted) {
                             System.out.println("Signal mit Code 5(Remove) empfangen");
-                            DeviceControlActivity.removeFromActivity(DeviceControlActivity.tvDocId.getText().toString(), USER);
+                            if(DeviceControlActivity.userJoined(DeviceControlActivity.tvDocId.getText().toString(), USER)) {
+                                DeviceControlActivity.removeFromActivity(DeviceControlActivity.tvDocId.getText().toString(), USER);
+                            }
                             eventFiveExecuted = true;
                         }
                         break;

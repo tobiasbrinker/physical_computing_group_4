@@ -64,11 +64,11 @@ int32_t testCharId;
 int32_t testReadId;
 
 uint8_t SEND_SERVICE_UUID[] = {0xF5,0x61,0x7C,0xD1,0x38,0xE8,0x4E,0x45,
-                           0xAD,0x46,0x63,0xB7, 0xD0,0xDB,0x0E,0x11};              
+                           0xAD,0x46,0x63,0xB7, 0xD0,0xDB,0x0E,0x01};              
 uint8_t TEST_SENSOR_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
-                           0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x12};
+                           0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x02};
 uint8_t TEST_RECEIVE_UUID[] = {0x39,0x8C,0x26,0xB3,0xC1,0x0D,0x4C,0xF0,0xAB,
-0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x13};
+0xD2,0x39,0xB7,0x91,0x4F,0xFC,0x03};
 
 
 // --- SEND AND RECEIVE SIGNALS FOR ACTIVITIES
@@ -101,10 +101,10 @@ void setup()
   delay(500);
   
   pinMode(buttonInput, INPUT);
-  pinMode(13, OUTPUT); //LED 1  Schütteln
+  pinMode(9, OUTPUT); //LED 1  Schütteln
   pinMode(12, OUTPUT); //LED 2  Waage
   pinMode(11, OUTPUT); //LED 3  Herzfrequenz
-  pinMode(9, OUTPUT); //LED 4  Activity Joined
+  pinMode(13, OUTPUT); //LED 4  Activity Joined
   
   Serial.begin(38400);
 
@@ -139,8 +139,8 @@ void setup()
 
 
   /* Change the device name to make it easier to find */
-  Serial.println(F("Setting device name to 'MeetingCube': "));
-  if (! ble.sendCommandCheckOK(F( "AT+GAPDEVNAME=MeetingCube2" )) ) {
+  Serial.println(F("Setting device name to 'MeetingCube1': "));
+  if (! ble.sendCommandCheckOK(F( "AT+GAPDEVNAME=MeetingCube1" )) ) {
     error(F("Could not set device name?"));
   }
 
@@ -157,7 +157,7 @@ void setup()
 
  
   /* Reset the device for the new service setting changes to take effect */
-  Serial.print(F("Performing a SW reset (service changes require a reset): "));
+  //Serial.print(F("Performing a SW reset (service changes require a reset): "));
   //ble.reset();
 
   // HEARTBEAT SETUP
@@ -169,7 +169,6 @@ void setup()
   heartbeatSensor.setup(); //Configure sensor with default settings
   heartbeatSensor.setPulseAmplitudeRed(0x0A); //Turn Red LED to low to indicate sensor is running
   heartbeatSensor.setPulseAmplitudeGreen(0); //Turn off Green LED
-
   // SHAKE SETUP
   for (int thisReading = 0; thisReading < numreadings; thisReading++) {
     readings_x[thisReading] = 0;
@@ -177,7 +176,7 @@ void setup()
   for (int thisReading = 0; thisReading < numreadings; thisReading++) {
     readings_y[thisReading] = 0;
   }
-  
+
   ble.reset();
 }
 
@@ -217,16 +216,16 @@ void loop() {
   // SHAKE LED
   if ((bluetooth_receive_signal[0] == receive_shakeactivity) || (bluetooth_receive_signal[0] == receive_shakeactivity_andjoined))
   {
-    digitalWrite(13, HIGH);
+    digitalWrite(9, HIGH);
   } else {
-    digitalWrite(13, LOW);
+    digitalWrite(9, LOW);
   }
   // Activity joined LED
   if ((bluetooth_receive_signal[0] == receive_heartbeatactivity_andjoined) || (bluetooth_receive_signal[0] == receive_scaleactivity_andjoined) || (bluetooth_receive_signal[0] == receive_shakeactivity_andjoined))
   {
-    digitalWrite(9, HIGH);
+    digitalWrite(13, HIGH);
   } else {
-    digitalWrite(9, LOW);
+    digitalWrite(13, LOW);
   }
 
   // ---------------------- SCALE ----------------------
@@ -236,6 +235,7 @@ void loop() {
   // get smoothed value from the dataset:
   if (newDataReady) {
     float j = LoadCell.getData();
+    //Serial.println(j);
       if (j > 100) {
         gatt.setChar(testCharId, send_scaleactivity, sizeof(send_scaleactivity));
         Serial.println("Send Trigger for Scale");
@@ -306,7 +306,6 @@ void loop() {
     digitalWrite(11, LOW);
   }
 
-  
   // ---------------------- SHAKE SENSOR ----------------------
   // average x
   total_x = total_x - readings_x[readIndex];
@@ -335,6 +334,7 @@ void loop() {
   if (abs(acc_Y_value-average_y) > 70) {
     shakeTriggerCounter += 1;
   }
+
   /*
   Serial.print ("X:");
   Serial.print(analogRead(acc_X));

@@ -432,11 +432,17 @@ public class DeviceControlActivity extends Activity {
             if (doc != "") {
                 JSONObject jobj = new JSONObject(doc);
                 String participants = jobj.get("participant").toString();
-                if(participants.toLowerCase().contains(userName.toLowerCase())) {
-                    return true;
-                } else {
-                    return false;
+                String[] parts = participants.split(",");
+                Boolean def = false;
+                for (int i = 0; i < parts.length; i++) {
+
+                    // accessing each element of array
+                    String x = parts[i];
+                    if(x.equals(userName)) {
+                        def = true;
+                    }
                 }
+                return def;
             } else {
                 Log.d("userJoinedJSON", "Could not get JSON Data!");
             }
@@ -461,8 +467,9 @@ public class DeviceControlActivity extends Activity {
             if (doc != "") {
                 JSONObject jobj = new JSONObject(doc);
                 String participants = jobj.get("participant").toString();
+
                 int count = participants.length() - participants.replace(",", "").length();
-                if (count == 0) { // only user active
+                if (count == 1) { // only user active
                     jobj.put("participant", "");
                     jobj.put("activity", "0");
 
@@ -472,6 +479,8 @@ public class DeviceControlActivity extends Activity {
                         Log.d("dbPut activity:", "0");
                     }, null);
                 } else {
+                    System.out.println("Removing:");
+                    System.out.println(userName);
                     final String participants_final = participants.replace("," + userName, "");
                     jobj.put("participant", participants_final);
 
@@ -508,7 +517,7 @@ public class DeviceControlActivity extends Activity {
                     updated_participants = participants;
                 } else {
                     if (participants == "") {
-                        updated_participants = new StringBuilder().append(participants).append(userName).toString();
+                        updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
                     } else {
                         updated_participants = new StringBuilder().append(participants).append(",").append(userName).toString();
                     }
@@ -542,7 +551,7 @@ public class DeviceControlActivity extends Activity {
             String doc = json_data[0];
             if (doc != "") {
                 JSONObject jobj = new JSONObject(doc);
-                jobj.put("participant", userName);
+                jobj.put("participant", "," + userName);
                 jobj.put("activity", activity);
                 // send document to server (and show response from server)
                 dbPut(dbUrl + docId, jobj, (JSONObject response) -> {
